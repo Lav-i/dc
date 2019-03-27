@@ -2,7 +2,6 @@ package com.hhu.dc.service;
 
 import com.hhu.dc.domain.Menu;
 import com.hhu.dc.domain.Result;
-import com.hhu.dc.repository.HotCakeRepository;
 import com.hhu.dc.repository.MenuRepository;
 import com.hhu.dc.utils.ResultUtil;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,11 +13,12 @@ public class MenuService {
     @Autowired
     private MenuRepository menuRepository;
 
-    @Autowired
-    private HotCakeRepository hotCakeRepository;
-
     public Result findByNameLike(String name) {
         return ResultUtil.success(menuRepository.findByNameLike(name));
+    }
+
+    public Result findAll() {
+        return ResultUtil.success(menuRepository.findAll());
     }
 
     public Result findByCategory(String name) {
@@ -30,7 +30,20 @@ public class MenuService {
     }
 
     public Result findHotCake() {
-        return ResultUtil.success(hotCakeRepository.findTop());
+        return ResultUtil.success(menuRepository.findTop().subList(0, 3));
+    }
+
+    public Result deleteById(Integer id) {
+        menuRepository.deleteById(id);
+        return ResultUtil.success();
+    }
+
+    public Result updateMenu(Menu menu) {
+        return ResultUtil.success(menuRepository.save(menu));
+    }
+
+    public Result findCategory() {
+        return ResultUtil.success(menuRepository.findCategory());
     }
 
     public Result init() {
