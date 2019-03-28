@@ -1,9 +1,7 @@
 package com.hhu.dc.domain;
 
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
+import javax.persistence.*;
 
 @Entity
 public class OrderItem {
@@ -13,8 +11,6 @@ public class OrderItem {
     private Integer id;
 
     private Integer menuId;
-
-    private Integer orderId;
 
     private Integer count;
 
@@ -36,14 +32,6 @@ public class OrderItem {
 
     public void setMenuId(Integer menuId) {
         this.menuId = menuId;
-    }
-
-    public Integer getOrderId() {
-        return orderId;
-    }
-
-    public void setOrderId(Integer orderId) {
-        this.orderId = orderId;
     }
 
     public Integer getId() {

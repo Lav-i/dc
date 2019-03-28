@@ -1,10 +1,7 @@
 package com.hhu.dc.domain;
 
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.Transient;
+import javax.persistence.*;
 import java.sql.Date;
 import java.util.List;
 
@@ -21,7 +18,8 @@ public class OrderInfo {
 
     private Integer state;
 
-    @Transient
+    @OneToMany(cascade=CascadeType.ALL)
+    @JoinColumn(name="orderId")
     private List<OrderItem> data;
 
     public Integer getState() {

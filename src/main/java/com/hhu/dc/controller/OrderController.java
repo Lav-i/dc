@@ -22,4 +22,9 @@ public class OrderController {
         return orderService.newOrder(orderInfo);
     }
 
+    @GetMapping(value = "")
+    public Result findAll() {
+        return orderService.findAll();
+    }
+
 }

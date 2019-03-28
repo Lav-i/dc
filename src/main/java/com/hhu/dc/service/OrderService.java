@@ -24,10 +24,13 @@ public class OrderService {
         List<OrderItem> data = orderInfo.getData();
         orderInfoRepository.save(orderInfo);
         for (OrderItem orderItem : data) {
-            orderItem.setOrderId(orderInfo.getId());
             orderItemRepository.save(orderItem);
         }
         return ResultUtil.success();
+    }
+
+    public Result findAll() {
+        return ResultUtil.success(orderInfoRepository.findAll());
     }
 
 }
