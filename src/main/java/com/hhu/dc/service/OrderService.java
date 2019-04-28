@@ -33,4 +33,9 @@ public class OrderService {
         return ResultUtil.success(orderInfoRepository.findAll());
     }
 
+    public Result deleteById(Integer id) {
+        orderInfoRepository.deleteById(id);
+        return ResultUtil.success();
+    }
+
 }

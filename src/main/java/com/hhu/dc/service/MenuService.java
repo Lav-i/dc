@@ -46,6 +46,10 @@ public class MenuService {
         return ResultUtil.success(menuRepository.findCategory());
     }
 
+    public Result newMenu(Menu menu) {
+        return ResultUtil.success(menuRepository.save(menu));
+    }
+
     public Result init() {
         Menu menu = new Menu();
         String[] name = {"麻婆豆腐", "水煮肉", "酸辣土豆丝", "干锅土豆丝"};

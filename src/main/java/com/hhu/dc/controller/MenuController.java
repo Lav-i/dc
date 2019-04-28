@@ -52,6 +52,11 @@ public class MenuController {
         return menuService.findCategory();
     }
 
+    @PostMapping(value = "/new")
+    public Result newMenu(@RequestBody Menu menu) {
+        return menuService.newMenu(menu);
+    }
+
     @GetMapping(value = "/init")
     public Result init() {
         return menuService.init();
