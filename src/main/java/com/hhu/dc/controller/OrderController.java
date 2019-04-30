@@ -4,6 +4,7 @@ import com.hhu.dc.domain.OrderInfo;
 import com.hhu.dc.domain.Result;
 import com.hhu.dc.service.OrderService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.repository.query.Param;
 import org.springframework.web.bind.annotation.*;
 
 import java.sql.Date;
@@ -32,9 +33,19 @@ public class OrderController {
         return orderService.findAll();
     }
 
-    @GetMapping(value = "/callwaiter")
-    public Result callWaiter() {
-        return null;
+    @GetMapping(value = "/month")
+    public Result findByMonth(@Param("months") Integer months) {
+        return orderService.findByMonth(months);
     }
+
+    @GetMapping(value = "/topitem")
+    public Result topItem(@Param("days") Integer days) {
+        return orderService.topItem(days);
+    }
+
+//    @GetMapping(value = "/callwaiter")
+//    public Result callWaiter() {
+//        return null;
+//    }
 
 }

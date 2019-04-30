@@ -9,7 +9,8 @@ import com.hhu.dc.utils.ResultUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.List;
+import java.text.SimpleDateFormat;
+import java.util.*;
 
 @Service
 public class OrderService {
@@ -36,6 +37,26 @@ public class OrderService {
     public Result deleteById(Integer id) {
         orderInfoRepository.deleteById(id);
         return ResultUtil.success();
+    }
+
+    public Result findByMonth(Integer months) {
+        List<Map> result = new ArrayList<>();
+        for (; months >= 0; months--) {
+            List<OrderInfo> list = orderInfoRepository.findByMonth(months);
+            Double price = 0.;
+            for (int i = 0; i < list.size(); i++) {
+                price += list.get(i).getPrice();
+            }
+            Map<String, Double> map = new HashMap<>();
+            map.put("price", price);
+            map.put("monthBefore", new Double(months));
+            result.add(map);
+        }
+        return ResultUtil.success(result);
+    }
+
+    public Result topItem(Integer days) {
+        return ResultUtil.success(orderItemRepository.topItem(days));
     }
 
 }

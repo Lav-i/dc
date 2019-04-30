@@ -18,8 +18,8 @@ public class OrderInfo {
 
     private Integer state;
 
-    @OneToMany(cascade=CascadeType.ALL)
-    @JoinColumn(name="orderId")
+    @OneToMany(cascade = CascadeType.ALL)
+    @JoinColumn(name = "orderId")
     private List<OrderItem> data;
 
     public Integer getState() {
@@ -64,6 +64,14 @@ public class OrderInfo {
 
     public void setCreateTime(Date creatTime) {
         this.createTime = creatTime;
+    }
+
+    public Double getPrice() {
+        Double price = 0.;
+        for (int i = 0; i < this.data.size(); i++) {
+            price += this.data.get(i).getCount() * this.data.get(i).getPrice();
+        }
+        return price;
     }
 
 }
