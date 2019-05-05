@@ -23,11 +23,11 @@ public class OrderService {
 
     public Result newOrder(OrderInfo orderInfo) {
         List<OrderItem> data = orderInfo.getData();
-        orderInfoRepository.save(orderInfo);
+        OrderInfo orderInfo1 = orderInfoRepository.save(orderInfo);
         for (OrderItem orderItem : data) {
             orderItemRepository.save(orderItem);
         }
-        return ResultUtil.success();
+        return ResultUtil.success(orderInfo);
     }
 
     public Result findAll() {
@@ -57,6 +57,22 @@ public class OrderService {
 
     public Result topItem(Integer days) {
         return ResultUtil.success(orderItemRepository.topItem(days));
+    }
+
+    public Result callWaiter(Integer id) {
+        OrderInfo orderInfo = orderInfoRepository.findById(id).orElse(null);
+        orderInfo.setState("呼叫服务员");
+        return ResultUtil.success(orderInfoRepository.save(orderInfo));
+    }
+
+    public Result state(Integer id, String state) {
+        OrderInfo orderInfo = orderInfoRepository.findById(id).orElse(null);
+        orderInfo.setState(state);
+        return ResultUtil.success(orderInfoRepository.save(orderInfo));
+    }
+
+    public Result findCall() {
+        return ResultUtil.success(orderInfoRepository.findCall());
     }
 
 }

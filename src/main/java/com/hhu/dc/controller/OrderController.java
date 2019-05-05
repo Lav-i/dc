@@ -43,9 +43,19 @@ public class OrderController {
         return orderService.topItem(days);
     }
 
-//    @GetMapping(value = "/callwaiter")
-//    public Result callWaiter() {
-//        return null;
-//    }
+    @PostMapping(value = "/callwaiter")
+    public Result callWaiter(@Param("id") Integer id) {
+        return orderService.callWaiter(id);
+    }
+
+    @PostMapping(value = "/state")
+    public Result state(@RequestBody Map<String, String> map) {
+        return orderService.state(new Integer(map.get("id")), map.get("state"));
+    }
+
+    @GetMapping(value = "/findcall")
+    public Result findCall() {
+        return orderService.findCall();
+    }
 
 }

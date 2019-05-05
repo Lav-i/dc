@@ -16,17 +16,17 @@ public class OrderInfo {
 
     private Date createTime;
 
-    private Integer state;
+    private String state;
 
     @OneToMany(cascade = CascadeType.ALL)
     @JoinColumn(name = "orderId")
     private List<OrderItem> data;
 
-    public Integer getState() {
+    public String getState() {
         return state;
     }
 
-    public void setState(Integer state) {
+    public void setState(String state) {
         this.state = state;
     }
 
