@@ -18,7 +18,12 @@ public interface OrderInfoRepository extends JpaRepository<OrderInfo, Integer> {
     @Query(nativeQuery = true, value = "select * from order_info where PERIOD_DIFF(date_format(now(),'%Y%m'),date_format(create_time,'%Y%m'))=:monthBefore")
     List<OrderInfo> findByMonth(@Param("monthBefore") Integer monthBefore);
 
-    @Query(value = "select o.tableId from OrderInfo o where o.state = '呼叫服务员'")
+    @Query(value = "select o.tableId from OrderInfo o where o.state like '%呼叫服务员%'")
     List<Integer> findCall();
+
+    @Query(value = "select o from OrderInfo o where o.state like '%已接收%'")
+    List<OrderInfo> findTodo();
+
+    OrderInfo findOrderInfoById(@Param("id") Integer id);
 
 }

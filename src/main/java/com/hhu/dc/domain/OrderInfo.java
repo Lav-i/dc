@@ -74,4 +74,12 @@ public class OrderInfo {
         return price;
     }
 
+    public Boolean isDone() {
+        for (int i = 0; i < this.data.size(); i++) {
+            if (!this.data.get(i).getFinish())
+                return false;
+        }
+        return true;
+    }
+
 }

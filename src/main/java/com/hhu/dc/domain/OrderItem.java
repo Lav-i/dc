@@ -18,8 +18,18 @@ public class OrderItem {
 
     private Double price;
 
+    private Boolean isFinish = false;
+
     public OrderItem() {
 
+    }
+
+    public Boolean getFinish() {
+        return isFinish;
+    }
+
+    public void setFinish(Boolean finish) {
+        isFinish = finish;
     }
 
     public String getName() {

@@ -61,7 +61,7 @@ public class OrderService {
 
     public Result callWaiter(Integer id) {
         OrderInfo orderInfo = orderInfoRepository.findById(id).orElse(null);
-        orderInfo.setState("呼叫服务员");
+        orderInfo.setState(orderInfo.getState() + "（正在呼叫服务员）");
         return ResultUtil.success(orderInfoRepository.save(orderInfo));
     }
 
@@ -73,6 +73,22 @@ public class OrderService {
 
     public Result findCall() {
         return ResultUtil.success(orderInfoRepository.findCall());
+    }
+
+    public Result findTodo() {
+        return ResultUtil.success(orderInfoRepository.findTodo());
+    }
+
+    public Result finishItem(Integer id, Integer menuId) {
+        OrderItem orderItem = orderItemRepository.findOrderItemById(id);
+        orderItem.setFinish(true);
+        orderItem = orderItemRepository.save(orderItem);
+        OrderInfo orderInfo = orderInfoRepository.findOrderInfoById(menuId);
+        if (orderInfo.isDone()) {
+            orderInfo.setState("已完成");
+            orderInfoRepository.save(orderInfo);
+        }
+        return ResultUtil.success(orderItem);
     }
 
 }

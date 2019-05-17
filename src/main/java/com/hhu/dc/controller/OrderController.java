@@ -43,7 +43,7 @@ public class OrderController {
         return orderService.topItem(days);
     }
 
-    @PostMapping(value = "/callwaiter")
+    @GetMapping(value = "/callwaiter")
     public Result callWaiter(@Param("id") Integer id) {
         return orderService.callWaiter(id);
     }
@@ -56,6 +56,16 @@ public class OrderController {
     @GetMapping(value = "/findcall")
     public Result findCall() {
         return orderService.findCall();
+    }
+
+    @GetMapping(value = "/findtodo")
+    public Result findTodo() {
+        return orderService.findTodo();
+    }
+
+    @GetMapping(value = "/finishitem")
+    public Result finishItem(@Param("id") Integer id, @Param("menuId") Integer menuId) {
+        return orderService.finishItem(id, menuId);
     }
 
 }

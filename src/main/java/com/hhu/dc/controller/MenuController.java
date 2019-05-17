@@ -57,8 +57,4 @@ public class MenuController {
         return menuService.newMenu(menu);
     }
 
-    @GetMapping(value = "/init")
-    public Result init() {
-        return menuService.init();
-    }
 }

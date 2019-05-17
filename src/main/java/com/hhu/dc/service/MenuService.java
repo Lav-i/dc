@@ -22,7 +22,7 @@ public class MenuService {
     }
 
     public Result findByCategory(String name) {
-        if (name.equals("all")) {
+        if (name.equals("所有")) {
             return ResultUtil.success(menuRepository.findAll());
         } else {
             return ResultUtil.success(menuRepository.findMenusByCategory(name));
@@ -48,22 +48,6 @@ public class MenuService {
 
     public Result newMenu(Menu menu) {
         return ResultUtil.success(menuRepository.save(menu));
-    }
-
-    public Result init() {
-        Menu menu = new Menu();
-        String[] name = {"麻婆豆腐", "水煮肉", "酸辣土豆丝", "干锅土豆丝"};
-        String[] cate = {"cold", "hot", "soup", "hot"};
-        for (int i = 3; i >= 0; i--) {
-            menu.setId(i);
-            menu.setName(name[i]);
-            menu.setPrice(Double.valueOf(String.format("%.2f", Math.random() * 50)));
-            menu.setDepict("desc");
-            menu.setCategory(cate[i]);
-            menu.setDiscount(1.0);
-            menuRepository.save(menu);
-        }
-        return ResultUtil.success();
     }
 
 }
